@@ -34,6 +34,9 @@
     <ClCompile Include="packetCapturer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="myWireShark.h">
@@ -52,5 +55,10 @@
     <QtRcc Include="myWireShark.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Frame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

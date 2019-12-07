@@ -8,6 +8,7 @@
 #include <QString>
 #include <QTimer>
 #include <QToolButton>
+#include <QTableWidgetItem>
 #include "packetCapturer.h"
 #include "ui_myWireShark.h"
 

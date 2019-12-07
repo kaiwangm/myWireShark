@@ -9,13 +9,19 @@
 #include <pcap.h>
 #include <vector>
 #include <string>
+#include <map>
+#include "Frame.h"
 using namespace std;
+
+
+class packet;
 
 class packetCapturer : public QThread
 {
 	Q_OBJECT
 private:
 	
+	map<int, string> portocolMap;
 	pcap_if_t* all_devs;
 	char ErrorBuf[PCAP_ERRBUF_SIZE] = { 0 };
 	pcap_t* handler;
@@ -23,19 +29,13 @@ private:
 	
 	void packet_handler(const struct pcap_pkthdr* header, const u_char* pkt_data);
 public:
-	vector<string> vs;
+	vector<packet> vs;
 	packetCapturer();
 
 };
 
 /* 4 bytes IP address */
-typedef struct ip_address
-{
-	u_char byte1;
-	u_char byte2;
-	u_char byte3;
-	u_char byte4;
-}ip_address;
+
 
 /* IPv4 header */
 typedef struct ip_header
@@ -61,3 +61,13 @@ typedef struct udp_header
 	u_short len;            // Datagram length
 	u_short crc;            // Checksum
 }udp_header;
+
+class packet
+{
+public:
+	string time;
+	string src;
+	string dst;
+	string por;
+	int length;
+};

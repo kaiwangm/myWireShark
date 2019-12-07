@@ -11,22 +11,24 @@ myWireShark::myWireShark(QWidget* parent)
 	connect(timer, SIGNAL(timeout()), this, SLOT(updateList()));
 	timer->start();
 
+	QTableWidget* tableWidget = ui.tableWidget;
+	tableWidget->setRowCount(100);
 }
 
 void myWireShark::updateList()
 {
-	cout << ui.listWidget->currentRow() << endl;
-	cout << ui.listWidget->count() - 1 << endl;
-	bool currisend = (ui.listWidget->currentRow() == (ui.listWidget->count() - 1));
 
-	ui.listWidget->clear();
-	QStringList items;
-	for (string &i:aa.vs)
+	QTableWidget* tableWidget = ui.tableWidget;
+	tableWidget->setRowCount(aa.vs.size());
+	for(int i=0;i<aa.vs.size();++i)
 	{
-		items << QString::fromStdString(i);
+		ui.tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(i)));
+		ui.tableWidget->setItem(i, 1, new QTableWidgetItem(QString(aa.vs[i].time.c_str())));
+		ui.tableWidget->setItem(i, 2, new QTableWidgetItem(QString(aa.vs[i].src.c_str())));
+		ui.tableWidget->setItem(i, 3, new QTableWidgetItem(QString(aa.vs[i].dst.c_str())));
+		ui.tableWidget->setItem(i, 4, new QTableWidgetItem(QString(aa.vs[i].por.c_str())));
+		ui.tableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(aa.vs[i].length)));
+
 	}
-	
-	ui.listWidget->addItems(items);
-	if(currisend)
-		ui.listWidget->setCurrentRow(ui.listWidget->count() - 1);
+
 }
