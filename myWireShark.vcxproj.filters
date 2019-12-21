@@ -37,12 +37,30 @@
     <ClCompile Include="Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="packetAnalyst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="packetManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="myWireShark.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="packetCapturer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="packetAnalyst.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="packetManger.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="FileManger.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

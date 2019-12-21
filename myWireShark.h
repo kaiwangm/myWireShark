@@ -9,7 +9,13 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QTableWidgetItem>
+#include <QTreeWidget>
+#include <QFileDialog>
+#include <QTextBrowser>
 #include "packetCapturer.h"
+#include "packetAnalyst.h"
+#include "packetManger.h"
+#include "FileManger.h"
 #include "ui_myWireShark.h"
 
 class myWireShark : public QMainWindow
@@ -18,12 +24,19 @@ class myWireShark : public QMainWindow
 
 public:
 	myWireShark(QWidget *parent = Q_NULLPTR);
-
+	~myWireShark();
 private slots:
 	void updateList();
-
+	void startCapture();
+	void pauseCapture();
+	void updateDetailsInfo();
+	void openSaveWindow();
+	void openReadWindow();
 private:
 	Ui::myWireSharkClass ui;
-	packetCapturer aa;
-	QTimer* timer;
+	packetCapturer mPacketCapturer;
+	packetAnalyst mPacketAnalyst;
+	packetManger mPacketManger;
+	FileManger mFileManger;
+	QTimer timer;
 };

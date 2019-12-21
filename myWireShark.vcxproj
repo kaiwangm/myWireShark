@@ -94,10 +94,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileManger.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myWireShark.cpp" />
+    <ClCompile Include="packetAnalyst.cpp" />
     <ClCompile Include="packetCapturer.cpp" />
+    <ClCompile Include="packetManger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="myWireShark.h" />
@@ -112,7 +115,10 @@
     <QtMoc Include="packetCapturer.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="FileManger.h" />
     <ClInclude Include="Frame.h" />
+    <QtMoc Include="packetManger.h" />
+    <QtMoc Include="packetAnalyst.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
