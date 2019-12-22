@@ -87,13 +87,15 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>Packet.lib;wpcap.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="devChoice.cpp" />
+    <ClCompile Include="errorWindow.cpp" />
     <ClCompile Include="FileManger.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="main.cpp" />
@@ -106,9 +108,6 @@
     <QtMoc Include="myWireShark.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="myWireShark.ui" />
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="myWireShark.qrc" />
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +115,16 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="FileManger.h" />
+    <QtMoc Include="devChoice.h" />
+    <QtMoc Include="errorWindow.h" />
     <ClInclude Include="Frame.h" />
     <QtMoc Include="packetManger.h" />
     <QtMoc Include="packetAnalyst.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="devChoice.ui" />
+    <QtUic Include="errorWindow.ui" />
+    <QtUic Include="myWireShark.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

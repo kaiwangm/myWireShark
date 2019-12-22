@@ -355,6 +355,7 @@ namespace networkPacket
 
 			udp["sourcePort"] = tool::bswap_16(udp_header.SourPort);
 			udp["destPort"] = tool::bswap_16(udp_header.DestPort);
+			udp["length"] = tool::bswap_16(udp_header.Length);
 			return udp;
 		}
 	};
@@ -400,6 +401,56 @@ namespace networkPacket
 			}
 			
 			return http;
+		}
+	};
+
+	class DnsPacket :public UdpPacket
+	{
+	public:
+		string DnsData;
+		struct dns_header
+		{
+			u_short flags;
+			u_char question;
+			u_char answer;
+			u_char authority_rrs;
+			u_char additional_rrs;
+		}dns_header;
+		DnsPacket(const UdpPacket& udpp)
+			:UdpPacket(udpp)
+		{
+			memcpy(&dns_header, &org_data[offset], (sizeof dns_header));
+			offset += (sizeof dns_header);
+
+			for (int i = offset; i < org_data.size(); ++i)
+			{
+				if (org_data[i] >= ' ' && org_data[i] <= '~')
+				{
+					DnsData += org_data[i];
+				}
+				else if (org_data[i] == 10)
+				{
+					DnsData += "\n";
+				}
+				else
+				{
+					DnsData += "-";
+				}
+			}
+		}
+
+		QJsonObject toObject()
+		{
+			QJsonObject dns;
+
+			dns["flags"] = QString("Flags:0x") + QString(tool::dec2hex(tool::bswap_32(dns_header.flags)).c_str());
+			dns["Question"] = QString("Question: ") + QString::number(dns_header.question);
+			dns["Answer"] = QString("Answer: ") + QString::number(dns_header.answer);
+			dns["Authority Rrs"] = QString("Authority Rrs: ") + QString::number(dns_header.authority_rrs);
+			dns["Additional Rrs"] = QString("Additional Rrs: ") + QString::number(dns_header.additional_rrs);
+			dns["_Data"] = QString("Data: ") + QString(DnsData.c_str());
+
+			return dns;
 		}
 	};
 }

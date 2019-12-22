@@ -56,20 +56,21 @@ Packet packetAnalyst::analysisPacket(Frame& orgin)
 	
 	EthernetPacket eth(orgin);
 	result.linkLayerInformation = eth.toObject();
+	result.portocol = "Ethernet II";
 
-
-
+	result.extractInfo = "Ethernet II Packet";
 	if (eth.FrameHeader.type[0] == 0x08 && eth.FrameHeader.type[1] == 0x00)
 	{
 		Ipv4Packet ipp(eth);
 		result.IPLayerInformation = ipp.toObject();
 		result.portocol = "ipv4";
+		result.extractInfo = "Unknown transport layer protocol";
 		if (ipp.getTransportLayerProtorn() == 6)
 		{
 			TcpPacket tcp(ipp);
 			result.transportLayerInformation = tcp.toObject();
 			result.portocol = "tcp";
-			result.extractInfo += to_string(result.transportLayerInformation["sourcePort"].toInt());
+			result.extractInfo = to_string(result.transportLayerInformation["sourcePort"].toInt());
 			result.extractInfo += " -> ";
 			result.extractInfo += to_string(result.transportLayerInformation["destPort"].toInt());
 			result.extractInfo += " Flags:";
@@ -103,6 +104,18 @@ Packet packetAnalyst::analysisPacket(Frame& orgin)
 			UdpPacket udp(ipp);
 			result.transportLayerInformation = udp.toObject();
 			result.portocol = "udp";
+			result.extractInfo = to_string(result.transportLayerInformation["sourcePort"].toInt());
+			result.extractInfo += " -> ";
+			result.extractInfo += to_string(result.transportLayerInformation["destPort"].toInt());
+			result.extractInfo += " Lengrh: ";
+			result.extractInfo += to_string(result.transportLayerInformation["length"].toInt());
+			if (result.transportLayerInformation["destPort"].toInt() == 53 ||
+				result.transportLayerInformation["sourcePort"].toInt() == 53)
+			{
+				DnsPacket dnsp(udp);
+				result.applicationLayerInformation = dnsp.toObject();
+				result.portocol = "dns";
+			}
 		}
 		else
 		{
@@ -114,6 +127,7 @@ Packet packetAnalyst::analysisPacket(Frame& orgin)
 		Ipv6Packet ipp(eth);
 		result.IPLayerInformation = ipp.toObject();
 		result.portocol = "ipv6";
+		result.extractInfo = "Unknown transport layer protocol";
 	}
 
 	return result;

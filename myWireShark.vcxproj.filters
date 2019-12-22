@@ -46,6 +46,12 @@
     <ClCompile Include="FileManger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="devChoice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="errorWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="myWireShark.h">
@@ -63,11 +69,12 @@
     <QtMoc Include="FileManger.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="myWireShark.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
+    <QtMoc Include="devChoice.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="errorWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="myWireShark.qrc">
@@ -78,5 +85,16 @@
     <ClInclude Include="Frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="myWireShark.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="devChoice.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="errorWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

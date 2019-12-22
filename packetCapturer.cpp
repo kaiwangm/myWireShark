@@ -12,7 +12,8 @@ packetCapturer::packetCapturer(packetManger* man)
 	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &all_devs, ErrorBuf) == -1)
 	{
 		fprintf(stderr, "Error in pcap_findalldevs_ex: %s\n", ErrorBuf);
-		exit(1);
+		ErrorFlag = 1;
+		return;
 	}
 
 	for (; all_devs != NULL; all_devs = all_devs->next)
@@ -21,14 +22,25 @@ packetCapturer::packetCapturer(packetManger* man)
 		networkDevice.push_back(all_devs);
 	}
 
-	handler = pcap_open_live(networkDevice[7]->name,    // name of the device
+	ErrorFlag = 0;	
+}
+
+void packetCapturer::setHandle(int i)
+{
+	char ErrorBuf[PCAP_ERRBUF_SIZE] = { 0 };
+	handler = pcap_open_live(networkDevice[i]->name,    // name of the device
 		65536,            // portion of the packet to capture. 
 						// 65536 grants that the whole packet will be captured on all the MACs.
 		1,                // promiscuous mode (nonzero means promiscuous)
 		1000,            // read timeout
 		ErrorBuf            // error buffer
 	);
-	
+	cout << ErrorBuf << endl;
+}
+
+int packetCapturer::getInitFlag()
+{
+	return ErrorFlag;
 }
 
 void packetCapturer::packet_handler(const struct pcap_pkthdr* header, const u_char* pkt_data)

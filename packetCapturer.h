@@ -26,12 +26,13 @@ private:
 	map<int, string> portocolMap;
 	pcap_t* handler;
 	packetManger* manger;
-	
+	int ErrorFlag;
 	
 public:
 	packetCapturer(packetManger* man);
 	vector<pcap_if_t*> networkDevice;
-
+	void setHandle(int i);
+	int getInitFlag();
 };
 
 

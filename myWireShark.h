@@ -16,6 +16,8 @@
 #include "packetAnalyst.h"
 #include "packetManger.h"
 #include "FileManger.h"
+#include "devChoice.h"
+#include "errorWindow.h"
 #include "ui_myWireShark.h"
 
 class myWireShark : public QMainWindow
@@ -32,6 +34,9 @@ private slots:
 	void updateDetailsInfo();
 	void openSaveWindow();
 	void openReadWindow();
+	void openErrorWindow();
+	void changeDev();
+	void setSearch();
 private:
 	Ui::myWireSharkClass ui;
 	packetCapturer mPacketCapturer;
@@ -39,4 +44,7 @@ private:
 	packetManger mPacketManger;
 	FileManger mFileManger;
 	QTimer timer;
+	int currentDev;
+	string searchOption;
+	bool needClear;
 };
