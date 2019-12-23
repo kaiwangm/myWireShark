@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1836</width>
+    <width>2289</width>
     <height>1035</height>
    </rect>
   </property>
@@ -19,47 +19,8 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
+    <item row="2" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QTreeWidget" name="treeWidget">
-        <column>
-         <property name="text">
-          <string>编号</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>捕获时间</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>长度</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>源地址</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>目的地址</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>协议</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>信息</string>
-         </property>
-        </column>
-       </widget>
-      </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
@@ -97,6 +58,22 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="maximum">
+             <number>30000</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="format">
+             <string>%v个包等待分析</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QTreeWidget" name="treeWidget_dev">
             <column>
@@ -164,6 +141,49 @@ p, li { white-space: pre-wrap; }
       </item>
      </layout>
     </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QTreeWidget" name="treeWidget">
+        <column>
+         <property name="text">
+          <string>编号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>捕获时间</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>长度</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>源地址</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>目的地址</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>协议</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>信息</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -171,7 +191,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1836</width>
+     <width>2289</width>
      <height>26</height>
     </rect>
    </property>
@@ -332,22 +352,6 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>treeWidget</sender>
-   <signal>clicked(QModelIndex)</signal>
-   <receiver>myWireSharkClass</receiver>
-   <slot>updateDetailsInfo()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>256</x>
-     <y>250</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1792</x>
-     <y>718</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionSave</sender>
    <signal>triggered()</signal>
    <receiver>myWireSharkClass</receiver>
@@ -402,11 +406,11 @@ p, li { white-space: pre-wrap; }
    <slot>setSearch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1746</x>
+     <x>2235</x>
      <y>104</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1860</x>
+     <x>1836</x>
      <y>57</y>
     </hint>
    </hints>
@@ -424,6 +428,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>917</x>
      <y>517</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>treeWidget</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>myWireSharkClass</receiver>
+   <slot>updateDetailsInfo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1792</x>
+     <y>718</y>
     </hint>
    </hints>
   </connection>

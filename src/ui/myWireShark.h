@@ -1,5 +1,13 @@
-#pragma once
+/*
+ * @Author: your name
+ * @Date: 2019-12-07 11:21:21
+ * @LastEditTime : 2019-12-23 23:26:01
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \src\ui\myWireShark.h
+ */
 
+#pragma once
 #include <QtWidgets/QMainWindow>
 #include <QListWidgetItem>
 #include <QStringList>
@@ -12,10 +20,10 @@
 #include <QTreeWidget>
 #include <QFileDialog>
 #include <QTextBrowser>
-#include "packetCapturer.h"
-#include "packetAnalyst.h"
-#include "packetManger.h"
-#include "FileManger.h"
+#include <packet/packetCapturer.h>
+#include <packet/packetAnalyst.h>
+#include <controller/packetManger.h>
+#include <controller/FileManger.h>
 #include "devChoice.h"
 #include "errorWindow.h"
 #include "ui_myWireShark.h"
@@ -29,6 +37,7 @@ public:
 	~myWireShark();
 private slots:
 	void updateList();
+	void upDateBar();
 	void startCapture();
 	void pauseCapture();
 	void updateDetailsInfo();

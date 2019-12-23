@@ -1,11 +1,19 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-21 01:51:59
+ * @LastEditTime: 2019-12-23 23:25:41
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \src\packet\packetAnalyst.h
+ */
+
 #pragma once
 #include <Qthread>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <iomanip>
-
-#include "packetManger.h"
+#include <controller/packetManger.h>
 
 using namespace std;
 class packetAnalyst : public QThread

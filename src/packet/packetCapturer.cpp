@@ -4,9 +4,6 @@ packetCapturer::packetCapturer(packetManger* man)
 	:manger(man)
 {
 	char ErrorBuf[PCAP_ERRBUF_SIZE] = { 0 };
-	portocolMap[6] = "TCP";
-	portocolMap[2] = "IGMP";
-	portocolMap[17] = "UDP";
 
 	pcap_if_t* all_devs;
 	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &all_devs, ErrorBuf) == -1)

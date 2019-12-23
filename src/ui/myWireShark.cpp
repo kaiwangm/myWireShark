@@ -10,7 +10,7 @@ myWireShark::myWireShark(QWidget* parent)
 {
 	ui.setupUi(this);
 
-	
+
 
 	if (mPacketCapturer.getInitFlag() == 1)
 	{
@@ -24,7 +24,7 @@ myWireShark::myWireShark(QWidget* parent)
 		choice.exec();
 		currentDev = choice.getCurrentDev();
 		mPacketCapturer.setHandle(currentDev);
-		ui.statusBar->showMessage((tr("Current network card: ")+QString(mPacketCapturer.networkDevice[currentDev]->description)), 5000);
+		ui.statusBar->showMessage((tr("Current network card: ") + QString(mPacketCapturer.networkDevice[currentDev]->description)), 5000);
 	}
 
 
@@ -32,9 +32,10 @@ myWireShark::myWireShark(QWidget* parent)
 	mPacketAnalyst.start();
 	ui.actionStart->setEnabled(false);
 
-	timer.setInterval(500);
-	connect(&timer, SIGNAL(timeout()), this, SLOT(updateList()));
-	timer.start();
+	QTimer* m_timer = new QTimer;
+	m_timer->start(20);
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateList()));
+	connect(&mPacketManger, SIGNAL(sigUpdate()), this, SLOT(upDateBar()));
 
 	QTreeWidget* tre = ui.treeWidget_dev;
 
@@ -51,7 +52,7 @@ myWireShark::myWireShark(QWidget* parent)
 			item->setBackgroundColor(0, QColor("gray"));
 			item->setBackgroundColor(1, QColor("gray"));
 		}
-		
+
 
 		tre->addTopLevelItem(item);
 	}
@@ -61,8 +62,8 @@ void myWireShark::updateList()
 {
 
 	QTreeWidget* tre = ui.treeWidget;
-	
-	
+
+	//cout << mPacketManger.unresolveSize() << endl;
 	if (ui.lineEdit->text() != "")
 	{
 		return;
@@ -72,7 +73,7 @@ void myWireShark::updateList()
 		tre->clear();
 		needClear = false;
 	}
-	for(int i=tre->topLevelItemCount();i<mPacketManger.completionSize();++i)
+	for (int i = tre->topLevelItemCount(); i < mPacketManger.completionSize(); ++i)
 	{
 		QStringList infoList;
 		infoList.append(QString::number(i));
@@ -90,7 +91,7 @@ void myWireShark::updateList()
 		}
 		infoList.append(QString(mPacketManger[i].portocol.c_str()));
 		infoList.append(QString(mPacketManger[i].extractInfo.c_str()));
-		QTreeWidgetItem *item = new QTreeWidgetItem(infoList);
+		QTreeWidgetItem* item = new QTreeWidgetItem(infoList);
 
 		if (mPacketManger[i].portocol == "http")
 		{
@@ -137,6 +138,15 @@ myWireShark::~myWireShark()
 	}
 }
 
+void myWireShark::upDateBar()
+{
+	int numPkg = mPacketManger.unresolveSize();
+	if (numPkg <= 30000)
+	{
+		ui.progressBar->setValue(numPkg);
+	}
+}
+
 void myWireShark::startCapture()
 {
 	if (!mPacketCapturer.isRunning())
@@ -157,17 +167,13 @@ void myWireShark::pauseCapture()
 	{
 		mPacketCapturer.terminate();
 	}
-	if (mPacketAnalyst.isRunning())
-	{
-		mPacketAnalyst.terminate();
-	}
 	ui.actionPause->setEnabled(false);
 	ui.actionStart->setEnabled(true);
 }
 
 void myWireShark::updateDetailsInfo()
 {
-	int index = ui.treeWidget->currentItem()->data(0,0).toInt();
+	int index = ui.treeWidget->currentItem()->data(0, 0).toInt();
 	Packet currentPacket = mPacketManger[index];
 	auto tre = ui.treeWidget_det;
 	tre->clear();
@@ -186,13 +192,13 @@ void myWireShark::updateDetailsInfo()
 	tre->addTopLevelItem(FrameLayer);
 
 	QTreeWidgetItem* LinkLayer = new QTreeWidgetItem();
-	LinkLayer->setText(0,"Link layer");
+	LinkLayer->setText(0, "Link layer");
 
 	QVariantMap Linkmp = currentPacket.linkLayerInformation.toVariantMap();
 	i = Linkmp.constBegin();
 	while (i != Linkmp.constEnd()) {
 		QTreeWidgetItem* newChild = new QTreeWidgetItem();
-		newChild->setText(0,i.key() + QString(":") + i.value().toString());
+		newChild->setText(0, i.key() + QString(":") + i.value().toString());
 		LinkLayer->addChild(newChild);
 		++i;
 	}
@@ -277,7 +283,7 @@ void myWireShark::openErrorWindow()
 
 void myWireShark::changeDev()
 {
-	
+
 	mPacketCapturer.terminate();
 	QTreeWidget* tre = ui.treeWidget_dev;
 	currentDev = ui.treeWidget_dev->currentIndex().row();
@@ -332,7 +338,7 @@ void myWireShark::setSearch()
 			infoList.append(mPacketManger[i].IPLayerInformation["source"].toString());
 			infoList.append(mPacketManger[i].IPLayerInformation["destination"].toString());
 		}
-		
+
 		infoList.append(QString(mPacketManger[i].portocol.c_str()));
 		infoList.append(QString(mPacketManger[i].extractInfo.c_str()));
 		QTreeWidgetItem* item = new QTreeWidgetItem(infoList);

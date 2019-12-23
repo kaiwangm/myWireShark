@@ -1,6 +1,7 @@
-#include "myWireShark.h"
 #include <QtWidgets/QApplication>
-#include "packetCapturer.h"
+#include <ui/myWireShark.h>
+#include <packet/packetCapturer.h>
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);

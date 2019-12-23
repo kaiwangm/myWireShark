@@ -1,3 +1,12 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-07 11:21:21
+ * @LastEditTime : 2019-12-23 23:25:45
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \src\packet\packetCapturer.h
+ */
+
 #pragma once
 #include <iostream>
 #include <functional>
@@ -10,12 +19,11 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <controller/packetManger.h>
 #include "Frame.h"
-#include "packetManger.h"
+
 using namespace std;
 using namespace networkPacket;
-
-
 
 class packetCapturer : public QThread
 {
