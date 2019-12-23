@@ -199,6 +199,7 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>文件</string>
     </property>
+    <addaction name="actionSave"/>
     <addaction name="actionRead"/>
     <addaction name="separator"/>
     <addaction name="actionPause"/>
@@ -300,7 +301,7 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="myWireShark.qrc"/>
+  <include location="../myWireShark.qrc"/>
  </resources>
  <connections>
   <connection>

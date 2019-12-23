@@ -1,9 +1,9 @@
 /*
- * @Author: Kai Wang
- * @Date: 2019-12-21 19:23:32
+ * @Author: JunWei Lin
+ * @Date: 2019-12-10 19:23:32
  * @LastEditTime : 2019-12-23 23:40:12
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors  : JunWei Lin
+ * @Description: 本文件实现了文件管理类的相关函数
  * @FilePath: \src\controller\FileManger.cpp
  */
 #include "FileManger.h"

@@ -2,8 +2,8 @@
  * @Author: Kai Wang
  * @Date: 2019-12-10 19:23:32
  * @LastEditTime : 2019-12-23 23:39:55
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditors  : Kai Wang
+ * @Description: 本文件定义了文件管理类
  * @FilePath: \src\controller\FileManger.h
  */
 
