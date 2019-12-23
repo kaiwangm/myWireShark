@@ -1,3 +1,6 @@
 x64/
 .vs/
 /src/.vscode
+myWireShark.sln
+myWireShark.vcxproj.filters
+myWireShark.vcxproj.user
